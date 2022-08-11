@@ -152,9 +152,10 @@ def test_my(args):
                 mapper = cm.ScalarMappable(norm=normalizer, cmap='magma')
                 colormapped_im = (mapper.to_rgba(disp_resized_np)[:, :, :3] * 255).astype(np.uint8)
                 im = pil.fromarray(colormapped_im)
-
                 name_dest_im = os.path.join(args.image_path, "{}_disp.jpeg".format(output_name))
+                im.save(name_dest_im)
                 tar.add(name_dest_im)
+                os.remove(name_dest_im)
                 if (idx + 1)%1000 == 1:
                     print("{:d} of {:d} - saved to:".format(idx + 1, len(paths))+"   -{}".format(name_dest_im))
                 
